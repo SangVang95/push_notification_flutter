@@ -67,15 +67,18 @@ class NotificationManager {
       sound: true,
     );
 
-    RemoteMessage? initialMessage =
-        await _firebaseMessaging.getInitialMessage();
-    if (initialMessage != null) {
-      _handleMessage(initialMessage);
-    }
-
     FirebaseMessaging.onMessage.listen(_onListen);
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  }
+
+  onInitMessage() async {
+    RemoteMessage? initialMessage =
+        await _firebaseMessaging.getInitialMessage();
+
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
   }
 
   _onListen(RemoteMessage message) {

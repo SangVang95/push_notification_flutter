@@ -45,6 +45,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _initMessage();
+  }
+
+  _initMessage() async {
+    await NotificationManager().onInitMessage();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: globalKey,
