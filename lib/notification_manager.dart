@@ -32,11 +32,19 @@ class NotificationManager {
 
   late final FirebaseMessaging _firebaseMessaging;
 
-  AndroidNotificationChannel channel = const AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notifications', // title
+  AndroidNotificationChannel aChannel = const AndroidNotificationChannel(
+    'high_importance_channel_a', // id
+    'High Importance Notifications_a', // title
     description:
-        'This channel is used for important notifications.', // description
+        'This a channel is used for important notifications.', // description
+    importance: Importance.high,
+  );
+
+  AndroidNotificationChannel bChannel = const AndroidNotificationChannel(
+    'high_importance_channel_b', // id
+    'High Importance Notifications_b', // title
+    description:
+        'This b channel is used for important notifications.', // description
     importance: Importance.high,
   );
 
@@ -59,7 +67,12 @@ class NotificationManager {
     await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
+        ?.createNotificationChannel(aChannel);
+
+    await _flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(bChannel);
 
     await _firebaseMessaging.setForegroundNotificationPresentationOptions(
       alert: true,
@@ -129,9 +142,9 @@ class NotificationManager {
     String payload,
   ) async {
     final details = AndroidNotificationDetails(
-      channel.id,
-      channel.name,
-      channelDescription: channel.description,
+      aChannel.id,
+      aChannel.name,
+      channelDescription: aChannel.description,
       importance: Importance.max,
       priority: Priority.high,
     );
