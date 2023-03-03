@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
           onPressed: () {
             isLogin = true;
             if (isFirstLogin) {
-              context.replaceRoute(CarouselRoute());
+              context.replaceRoute(const CarouselRoute());
               isFirstLogin = false;
               return;
             }

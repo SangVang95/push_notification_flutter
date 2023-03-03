@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:push_noti/dynamic_link_manager.dart';
 import 'package:push_noti/main.dart';
 import 'package:push_noti/routes/app_router.gr.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -22,6 +26,15 @@ class _DetailPageState extends State<DetailPage> {
       child: Scaffold(
           appBar: AppBar(
             actions: [
+              IconButton(
+                onPressed: () async {
+                  final link = await DynamicLinkManagers().onBuildLink('123');
+
+                  Share.share(link.toString());
+                },
+                icon: const Icon(Icons.share),
+              ),
+              const SizedBox(width: 10),
               TextButton(
                 onPressed: () {
                   isLogin = false;
