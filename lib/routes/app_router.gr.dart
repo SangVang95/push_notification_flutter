@@ -12,18 +12,18 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i9;
+import 'package:auto_route/empty_router_widgets.dart' as _i4;
 import 'package:flutter/material.dart' as _i10;
 
-import '../app_child_page.dart' as _i4;
 import '../app_page.dart' as _i1;
-import '../carousel_page.dart' as _i3;
-import '../detail_page.dart' as _i8;
-import '../first_page.dart' as _i6;
+import '../carousel_page.dart' as _i2;
+import '../detail_page.dart' as _i7;
+import '../first_page.dart' as _i5;
 import '../guard/app_guard.dart' as _i12;
 import '../guard/auth_guard.dart' as _i11;
-import '../home_page.dart' as _i7;
-import '../login_page.dart' as _i2;
-import '../second_page.dart' as _i5;
+import '../home_page.dart' as _i6;
+import '../login_page.dart' as _i3;
+import '../second_page.dart' as _i8;
 
 class AppRouter extends _i9.RootStackRouter {
   AppRouter({
@@ -44,41 +44,41 @@ class AppRouter extends _i9.RootStackRouter {
         child: const _i1.AppPage(),
       );
     },
-    LoginRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i2.LoginPage(),
-      );
-    },
     CarouselRoute.name: (routeData) {
       return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i3.CarouselPage(),
+        child: const _i2.CarouselPage(),
       );
     },
-    AppChildRoute.name: (routeData) {
+    LoginRoute.name: (routeData) {
       return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i4.AppChildPage(),
+        child: const _i3.LoginPage(),
       );
     },
-    SecondRoute.name: (routeData) {
+    FirstRouter.name: (routeData) {
       return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i5.SecondPage(),
+        child: const _i4.EmptyRouterPage(),
+      );
+    },
+    SecondRouter.name: (routeData) {
+      return _i9.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i4.EmptyRouterPage(),
       );
     },
     FirstRoute.name: (routeData) {
       return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i6.FirstPage(),
+        child: const _i5.FirstPage(),
       );
     },
     MyHomeRoute.name: (routeData) {
       final args = routeData.argsAs<MyHomeRouteArgs>();
       return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i7.MyHomePage(
+        child: _i6.MyHomePage(
           key: args.key,
           title: args.title,
         ),
@@ -87,7 +87,13 @@ class AppRouter extends _i9.RootStackRouter {
     DetailRoute.name: (routeData) {
       return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i8.DetailPage(),
+        child: const _i7.DetailPage(),
+      );
+    },
+    SecondRoute.name: (routeData) {
+      return _i9.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i8.SecondPage(),
       );
     },
   };
@@ -100,42 +106,49 @@ class AppRouter extends _i9.RootStackRouter {
           guards: [authGuard],
           children: [
             _i9.RouteConfig(
-              AppChildRoute.name,
-              path: 'app-child-page',
+              FirstRouter.name,
+              path: 'empty-router-page',
               parent: AppRoute.name,
               children: [
                 _i9.RouteConfig(
                   FirstRoute.name,
                   path: '',
-                  parent: AppChildRoute.name,
+                  parent: FirstRouter.name,
                 ),
                 _i9.RouteConfig(
                   MyHomeRoute.name,
                   path: 'my-home-page',
-                  parent: AppChildRoute.name,
+                  parent: FirstRouter.name,
                 ),
                 _i9.RouteConfig(
                   DetailRoute.name,
                   path: 'detail-page',
-                  parent: AppChildRoute.name,
+                  parent: FirstRouter.name,
                 ),
               ],
             ),
             _i9.RouteConfig(
-              SecondRoute.name,
-              path: 'second-page',
+              SecondRouter.name,
+              path: 'empty-router-page',
               parent: AppRoute.name,
+              children: [
+                _i9.RouteConfig(
+                  SecondRoute.name,
+                  path: '',
+                  parent: SecondRouter.name,
+                )
+              ],
             ),
           ],
+        ),
+        _i9.RouteConfig(
+          CarouselRoute.name,
+          path: '/carousel-page',
         ),
         _i9.RouteConfig(
           LoginRoute.name,
           path: '/login-page',
           guards: [appGuard],
-        ),
-        _i9.RouteConfig(
-          CarouselRoute.name,
-          path: '/carousel-page',
         ),
       ];
 }
@@ -154,19 +167,7 @@ class AppRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.LoginPage]
-class LoginRoute extends _i9.PageRouteInfo<void> {
-  const LoginRoute()
-      : super(
-          LoginRoute.name,
-          path: '/login-page',
-        );
-
-  static const String name = 'LoginRoute';
-}
-
-/// generated route for
-/// [_i3.CarouselPage]
+/// [_i2.CarouselPage]
 class CarouselRoute extends _i9.PageRouteInfo<void> {
   const CarouselRoute()
       : super(
@@ -178,32 +179,45 @@ class CarouselRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.AppChildPage]
-class AppChildRoute extends _i9.PageRouteInfo<void> {
-  const AppChildRoute({List<_i9.PageRouteInfo>? children})
+/// [_i3.LoginPage]
+class LoginRoute extends _i9.PageRouteInfo<void> {
+  const LoginRoute()
       : super(
-          AppChildRoute.name,
-          path: 'app-child-page',
+          LoginRoute.name,
+          path: '/login-page',
+        );
+
+  static const String name = 'LoginRoute';
+}
+
+/// generated route for
+/// [_i4.EmptyRouterPage]
+class FirstRouter extends _i9.PageRouteInfo<void> {
+  const FirstRouter({List<_i9.PageRouteInfo>? children})
+      : super(
+          FirstRouter.name,
+          path: 'empty-router-page',
           initialChildren: children,
         );
 
-  static const String name = 'AppChildRoute';
+  static const String name = 'FirstRouter';
 }
 
 /// generated route for
-/// [_i5.SecondPage]
-class SecondRoute extends _i9.PageRouteInfo<void> {
-  const SecondRoute()
+/// [_i4.EmptyRouterPage]
+class SecondRouter extends _i9.PageRouteInfo<void> {
+  const SecondRouter({List<_i9.PageRouteInfo>? children})
       : super(
-          SecondRoute.name,
-          path: 'second-page',
+          SecondRouter.name,
+          path: 'empty-router-page',
+          initialChildren: children,
         );
 
-  static const String name = 'SecondRoute';
+  static const String name = 'SecondRouter';
 }
 
 /// generated route for
-/// [_i6.FirstPage]
+/// [_i5.FirstPage]
 class FirstRoute extends _i9.PageRouteInfo<void> {
   const FirstRoute()
       : super(
@@ -215,7 +229,7 @@ class FirstRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.MyHomePage]
+/// [_i6.MyHomePage]
 class MyHomeRoute extends _i9.PageRouteInfo<MyHomeRouteArgs> {
   MyHomeRoute({
     _i10.Key? key,
@@ -249,7 +263,7 @@ class MyHomeRouteArgs {
 }
 
 /// generated route for
-/// [_i8.DetailPage]
+/// [_i7.DetailPage]
 class DetailRoute extends _i9.PageRouteInfo<void> {
   const DetailRoute()
       : super(
@@ -258,4 +272,16 @@ class DetailRoute extends _i9.PageRouteInfo<void> {
         );
 
   static const String name = 'DetailRoute';
+}
+
+/// generated route for
+/// [_i8.SecondPage]
+class SecondRoute extends _i9.PageRouteInfo<void> {
+  const SecondRoute()
+      : super(
+          SecondRoute.name,
+          path: '',
+        );
+
+  static const String name = 'SecondRoute';
 }

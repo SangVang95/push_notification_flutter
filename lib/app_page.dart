@@ -9,8 +9,11 @@ class AppPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: const [
-        AppChildRoute(),
-        SecondRoute(),
+        // AppChildRoute(),
+        // FirstRoute(),
+        // SecondRoute(),
+        FirstRouter(),
+        SecondRouter()
       ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);

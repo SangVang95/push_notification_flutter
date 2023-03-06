@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/empty_router_widgets.dart';
 import 'package:push_noti/app_child_page.dart';
 import 'package:push_noti/app_page.dart';
 import 'package:push_noti/carousel_page.dart';
@@ -19,14 +20,24 @@ import 'package:push_noti/second_page.dart';
       guards: [AuthGuard],
       children: [
         AutoRoute(
-          page: AppChildPage,
+          name: 'FirstRouter',
+          page: EmptyRouterPage,
           children: [
             AutoRoute(page: FirstPage, initial: true),
             AutoRoute(page: MyHomePage),
             AutoRoute(page: DetailPage),
           ],
         ),
-        AutoRoute(page: SecondPage),
+        AutoRoute(
+          name: 'SecondRouter',
+          page: EmptyRouterPage,
+          children: [
+            AutoRoute(
+              page: SecondPage,
+              initial: true,
+            ),
+          ],
+        ),
       ],
     ),
     AutoRoute(

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:push_noti/dynamic_link_manager.dart';
@@ -25,6 +23,7 @@ class _DetailPageState extends State<DetailPage> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
           appBar: AppBar(
+            title: const Text(String.fromEnvironment('NAME')),
             actions: [
               IconButton(
                 onPressed: () async {

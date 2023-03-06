@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:flutter/material.dart';
 import 'package:push_noti/main.dart';
 import 'package:push_noti/routes/app_router.gr.dart';
 
@@ -28,7 +27,7 @@ class DynamicLinkManagers {
 
   Future<Uri> onBuildLink(String id) async {
     final parameters = DynamicLinkParameters(
-      link: Uri.parse("https://techmobile.page.link/mb?id=$id"),
+      link: Uri.parse("https://techlink.com/$id"),
       uriPrefix: "https://techmobile.page.link",
       androidParameters: const AndroidParameters(
         packageName: "com.vinova.pushNotification",
@@ -40,9 +39,12 @@ class DynamicLinkManagers {
       ),
     );
 
-    final link = parameters.link;
+    final link = await _dynamicLinks.buildShortLink(
+      parameters,
+      shortLinkType: ShortDynamicLinkType.unguessable,
+    );
 
-    return link;
+    return link.shortUrl;
   }
 
   _onListen() async {
