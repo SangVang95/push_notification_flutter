@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:push_noti/detail_page.dart';
 import 'package:push_noti/notification_manager.dart';
 
+@RoutePage()
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 

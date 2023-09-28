@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:push_noti/routes/app_router.gr.dart';
 
+@RoutePage()
 class AppPage extends StatelessWidget {
   const AppPage({super.key});
 
@@ -9,19 +10,17 @@ class AppPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: const [
-        // AppChildRoute(),
-        // FirstRoute(),
-        // SecondRoute(),
         FirstRouter(),
-        SecondRouter()
+        SecondRouter(),
       ],
-      builder: (context, child, animation) {
+      transitionBuilder: (context, child, animation) => FadeTransition(
+        opacity: animation,
+        child: child,
+      ),
+      builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
-          body: FadeTransition(
-            opacity: animation,
-            child: child,
-          ),
+          body: child,
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: Colors.amber,
             unselectedItemColor: Colors.grey,

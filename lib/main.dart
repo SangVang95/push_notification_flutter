@@ -1,22 +1,23 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:push_noti/dynamic_link_manager.dart';
-import 'package:push_noti/guard/app_guard.dart';
-import 'package:push_noti/guard/auth_guard.dart';
+import 'package:push_noti/firebase_options.dart';
 import 'package:push_noti/notification_manager.dart';
-import 'package:push_noti/routes/app_router.gr.dart';
+import 'package:push_noti/routes/app_router.dart';
 
 final locator = GetIt.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await NotificationManager().instance();
 
-  locator.registerSingleton<AppRouter>(AppRouter(
-    authGuard: AuthGuard(),
-    appGuard: AppGuard(),
-  ));
+  locator.registerSingleton<AppRouter>(AppRouter());
 
   runApp(const MyApp());
 }

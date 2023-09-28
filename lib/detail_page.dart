@@ -5,6 +5,7 @@ import 'package:push_noti/main.dart';
 import 'package:push_noti/routes/app_router.gr.dart';
 import 'package:share_plus/share_plus.dart';
 
+@RoutePage()
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
 

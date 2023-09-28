@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:push_noti/main.dart';
+import 'package:push_noti/routes/app_router.dart';
 import 'package:push_noti/routes/app_router.gr.dart';
 
 class DynamicLinkManagers {
